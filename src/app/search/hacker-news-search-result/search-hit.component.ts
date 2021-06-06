@@ -21,6 +21,9 @@ export class SearchHitComponent implements OnInit {
 
   constructor() { }
 
+  /**
+   * Will open the article in a new browser tab.
+   */
   goToArticle(){
 
     window.open(this.searchHit.url, '_blank')

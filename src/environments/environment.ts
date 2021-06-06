@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  sentry_dsn: "https://a7a06f51e4eb44888c957738592d4b8b@o805718.ingest.sentry.io/5803276",
+  release: "0.0.0"
 };
 
 /*

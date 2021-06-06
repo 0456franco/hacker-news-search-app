@@ -26,7 +26,7 @@
     
         <!-- Position Column -->
         <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let searchHistoryQuery; let i = index"> {{ i + 1 }} </td>
         </ng-container>
       
@@ -51,7 +51,7 @@
         <!-- Link Out Column -->
         <ng-container matColumnDef="clickable">
           <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let searchHistoryQuery" [ngStyle]="{'cursor':'pointer'}">
+          <td mat-cell *matCellDef="let searchHistoryQuery" class="text-center" [ngStyle]="{'cursor':'pointer'}">
             <fa-icon class="faSearch" [icon]="faExternalLink"></fa-icon>
           </td>
         </ng-container>
@@ -59,7 +59,7 @@
         <!-- Delete Record Column -->
         <ng-container matColumnDef="trash">
           <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let searchHistoryQuery" [ngStyle]="{'cursor':'pointer'}" (click)="deleteSingleItem(searchHistoryQuery)">
+          <td mat-cell *matCellDef="let searchHistoryQuery" class="text-center" [ngStyle]="{'cursor':'pointer'}" (click)="deleteSingleItem(searchHistoryQuery)">
             <fa-icon class="faTrash" [icon]="faTrash"></fa-icon>
           </td>
         </ng-container>

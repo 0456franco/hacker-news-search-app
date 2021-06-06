@@ -29,10 +29,19 @@ export class HistoryComponent implements OnInit {
 
   constructor(private hackerNewsSearchHistoryService: HackerNewsSearchHistoryService) { }
 
+  /**
+   * Formats the number of hits into proper locale.
+   * @param hits 
+   * @param locale 
+   * @returns 
+   */
   getFormattedHits(hits: number, locale: string){
     return formatNumber(hits, locale)
   }
 
+  /**
+   * Will clear all the search history using the Hacker News Search History Service.
+   */
   async clearAllSearchHistory(){
 
     const deleteHistory = await this.hackerNewsSearchHistoryService.clearAllSearchHistory()
@@ -44,7 +53,10 @@ export class HistoryComponent implements OnInit {
     
   }
 
-  getSearchHistory(){
+  /**
+   * Will fetch the current search history using the Hacker News Search History Service.
+   */
+  getSearchHistory(): void{
 
     this.searchHistory = this.hackerNewsSearchHistoryService.getSearchHistory()
 
@@ -60,9 +72,12 @@ export class HistoryComponent implements OnInit {
 
   }
 
+  /**
+   * Will delete a single item from the HackerNewsSearchHistory item.
+   * @param hackerNewsSearchQuery Item to delete
+   * TODO: This function breaks sorting. 
+   */
   async deleteSingleItem(hackerNewsSearchQuery: HackerNewsSearchQueryExtended){
-
-    console.log("Item to delete", hackerNewsSearchQuery)
 
     const deleteSingleItem = await this.hackerNewsSearchHistoryService.removeHistoryItem(hackerNewsSearchQuery)
 

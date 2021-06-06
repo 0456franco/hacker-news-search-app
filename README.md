@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
 
+- Using Bootstrap 5, Angular Material, & Sentry.
+
+## Live Demo
+
+You can find the live demo deployed using netlify here: 
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

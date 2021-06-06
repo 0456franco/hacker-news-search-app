@@ -10,6 +10,7 @@ import { HackerNewsSearchHit } from '../services/hacker-news/models/hacker-news-
 import { HackerNewsSearchHistoryService } from '../services/hacker-news/search-history/hacker-news-search-history.service'
 import { formatNumber } from '@angular/common'
 import * as dateFormat from 'dateformat'
+import { ActivatedRoute } from '@angular/router'
 
 const SEARCH_QUERY_DATE_FORMAT = "dddd, mmmm dS, yyyy, h:MM:ss TT"
 
@@ -36,6 +37,7 @@ export class SearchComponent implements OnInit {
   public searchForm: FormGroup = new FormGroup({})
 
   constructor(private formBuilder: FormBuilder,
+              private activatedRoute: ActivatedRoute,
               private hackerNewsSearchService: HackerNewsSearchService,
               private hackerNewsSearchHistoryService: HackerNewsSearchHistoryService) { }
 
@@ -81,8 +83,6 @@ export class SearchComponent implements OnInit {
 
     if(resp){
 
-      console.log("populateSearchHits", resp)
-
       this.searchHits = resp.nbHits
       this.totalPages = resp.nbPages
 
@@ -125,6 +125,14 @@ export class SearchComponent implements OnInit {
         ValidateSearchQuery( this.searchQuery )        
       }
     })
+
+    //Let's check if there is an exiting query parameter in our URL.
+    let searchQueryParam = this.activatedRoute.snapshot.paramMap.get('query')
+
+    if(searchQueryParam !== null){
+      //A query paramter exists, we must execute the query into our search form
+      console.log("Search Query", searchQueryParam)
+    }
 
     this.loading = false
 

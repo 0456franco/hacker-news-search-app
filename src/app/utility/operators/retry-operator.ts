@@ -1,4 +1,5 @@
 import { Observable, of, throwError } from "rxjs"
+import * as Sentry from "@sentry/angular"
 
 import {
 	delay,
@@ -6,11 +7,66 @@ import {
 	retryWhen
 } from "rxjs/operators"
 
-const DEFAULT_MAX_RETRIES: number = 3;
-const DEFAULT_BACKOFF: number = 1000;
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog"
+import { ErrorHandlerComponent } from "src/app/error-handler/error-handler/error-handler.component"
 
-const getErrorMessage = (maxRetry: number) =>
-	`Tried to load resource over XHR for ${maxRetry} times without success. Giving Up.`;
+const DEFAULT_MAX_RETRIES: number = 3
+const DEFAULT_BACKOFF: number = 1000
+
+export function logErrorMessage(maxRetry: number, serverResponse: any, context: any = null, matDialog?: MatDialog){
+
+	context.requestRetries = maxRetry
+	context.serverResponse = serverResponse
+
+	let sentryException = context.error
+
+	delete context.error
+
+
+	
+	Sentry.withScope((scope) => {
+
+		let i = 0
+
+		Object.keys(context).forEach( contextKey => {
+			scope.setExtra(contextKey, Object.values(context)[i])
+			i++
+		});
+
+		Sentry.captureException(sentryException)
+
+	});
+
+	
+	Sentry.setContext("Error Context", context)
+
+	if(matDialog !== undefined){
+		
+		const dialogConfig = new MatDialogConfig()
+
+		dialogConfig.autoFocus = true
+		dialogConfig.panelClass = "errorHandlerInfoPanel"
+		
+		let errorMessage
+
+		if(serverResponse.error != null && serverResponse.error.errors !== undefined)
+			errorMessage = Object.values(serverResponse.error.errors)[0]
+		else
+			errorMessage = context.errorMessage
+
+		dialogConfig.data = {
+			errorMessage: errorMessage
+		}
+
+
+		let dialogRef = matDialog.open(
+			ErrorHandlerComponent,
+			dialogConfig
+		)
+
+	}
+	
+}
 
 export function retryWithBackOff(
 	delayMs: number,
@@ -28,7 +84,7 @@ export function retryWithBackOff(
 								delayMs + (maxRetry - retries) * backOffMs;
 							return of(error).pipe(delay(backOffTime));
                         }
-                        return throwError(getErrorMessage(maxRetry));
+                        return throwError(error);
 					})
 				)
 			)

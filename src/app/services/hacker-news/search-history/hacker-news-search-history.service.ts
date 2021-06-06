@@ -7,9 +7,12 @@ import { HackerNewsSearchQuery, HackerNewsSearchQueryExtended } from '../models/
 })
 export class HackerNewsSearchHistoryService {
 
-
   constructor() { }
 
+  /**
+   * Adds an item to the user's history.
+   * @param query 
+   */
   addHistoryItem(query: HackerNewsSearchQueryExtended){
 
     let searchHistoryString = localStorage.getItem('search_history')
@@ -32,6 +35,9 @@ export class HackerNewsSearchHistoryService {
 
   }
 
+  /**
+   * @returns Returns an array of all current Search Queries in history.
+   */
   getSearchHistory(): Array<HackerNewsSearchQueryExtended>{
 
     let searchHistoryString = localStorage.getItem('search_history')
@@ -51,12 +57,10 @@ export class HackerNewsSearchHistoryService {
   }
 
   /**
-   * Find a history item by date.
+   * Remove a single query from the search history.
+   * @param query 
+   * @returns 
    */
-  findItemByDate(date: string, searchHistory: Array<HackerNewsSearchQueryExtended>){
-
-  }
-
   async removeHistoryItem(query: HackerNewsSearchQueryExtended): Promise<boolean>{
 
     return new Promise((resolve, reject) => {
@@ -77,37 +81,31 @@ export class HackerNewsSearchHistoryService {
 
         if(queryToDelete !== undefined)
           itemIndex = searchLocalHistory.history.indexOf(queryToDelete)
-        else {
-
+        else 
           return reject(false)
-
-        }
-        
-
-        console.log("itemIndex", itemIndex)
-
-        console.log("searchLocalHistory", searchLocalHistory)
 
         if(itemIndex > -1){
 
           //Remove the query from the search history array
-          searchLocalHistory.history.splice(itemIndex, -1)
+          searchLocalHistory.history.splice(itemIndex, 1)
 
           //Re-save the history into the local storage.
           localStorage.setItem('search_history', JSON.stringify(searchLocalHistory) )
 
           return resolve(true)
 
-        } else
-          return reject(false)
+        } else return reject(false)
       
-      } else
-        return reject(false)
+      } else return reject(false)
 
     })
 
   }
 
+  /**
+   * Clear all search history.
+   * @returns Resolves to true if history was cleared, and false if there was an error.
+   */
   async clearAllSearchHistory(): Promise<boolean>{
 
     localStorage.removeItem('search_history')
@@ -123,6 +121,10 @@ export class HackerNewsSearchHistoryService {
   
   }
   
+  /**
+   * Will search history for an item using a keyword and then return it.
+   * @param searchKeyword 
+   */
   searchHistoryForItem(searchKeyword: string){
 
   }

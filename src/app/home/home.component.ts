@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { faBook, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faClock, faSearch } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,7 @@ import { faBook, faSearch } from '@fortawesome/free-solid-svg-icons'
 export class HomeComponent implements OnInit {
 
   faSearch = faSearch
-  faBook = faBook
+  faClock = faClock
 
   constructor() { }
 
