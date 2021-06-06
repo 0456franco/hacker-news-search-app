@@ -1,0 +1,33 @@
+.search-hit-link{
+    text-decoration: none !important;
+}
+
+mat-card > h2{
+    cursor: pointer;
+}
+
+mat-card > h2{
+    color: #0d6efd;
+    text-decoration: underline;
+}
+
+.faUser, .faClock, .faComment, .faStar{
+    opacity: 0.5;
+    font-size: 15px;
+}
+
+span.author{
+    cursor: pointer;
+}
+
+.faArrowDoubleRight{
+    position: absolute;
+    font-size: 4rem;
+    opacity: .3;
+    right: 10px;
+    top: 50%;
+    bottom: 0;
+    transform: translateY(-50%);
+    color: #0d6efd;
+    cursor: pointer;
+}

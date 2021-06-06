@@ -1,0 +1,74 @@
+<div class="container-sm pt-5 pb-5">
+
+    <h1 class="cover-heading">History</h1>
+    
+    <div *ngIf="searchHistory.length < 1 else loaded">
+
+      <p class="lead">
+        <fa-icon class="faClock" [icon]="faClock"></fa-icon>No Search History Available.
+      </p>
+
+      <a routerLink="/search">Start Searching</a>
+
+    </div>
+
+    <ng-template #loaded>
+
+      <p class="lead">
+        View a list of past <a href="https://hn.algolia.com/">Hacker News Algolia API</a> searches from your past sessions.
+      </p>
+
+      <a class="mb-3" type="button" (click)="clearAllSearchHistory()">
+        Clear All Search History
+      </a>
+
+      <table mat-table [dataSource]="sortableSearchHistory" matSort class="mat-elevation-z8">
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let searchHistoryQuery; let i = index"> {{ i + 1 }} </td>
+        </ng-container>
+      
+        <!-- Query Column -->
+        <ng-container matColumnDef="query">
+          <th mat-header-cell *matHeaderCellDef> Query </th>
+          <td mat-cell *matCellDef="let searchHistoryQuery"> {{ searchHistoryQuery.query }} </td>
+        </ng-container>
+      
+        <!-- Time Column -->
+        <ng-container matColumnDef="timeOfSearchFriendly">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Time </th>
+          <td mat-cell *matCellDef="let searchHistoryQuery"> {{ searchHistoryQuery.timeOfSearchFriendly }} </td>
+        </ng-container>
+      
+        <!-- Results Column -->
+        <ng-container matColumnDef="hits">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Hits </th>
+          <td mat-cell *matCellDef="let searchHistoryQuery"> {{ getFormattedHits(searchHistoryQuery.hits, 'en-US') }} </td>
+        </ng-container>
+      
+        <!-- Link Out Column -->
+        <ng-container matColumnDef="clickable">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let searchHistoryQuery" [ngStyle]="{'cursor':'pointer'}">
+            <fa-icon class="faSearch" [icon]="faExternalLink"></fa-icon>
+          </td>
+        </ng-container>
+
+        <!-- Delete Record Column -->
+        <ng-container matColumnDef="trash">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let searchHistoryQuery" [ngStyle]="{'cursor':'pointer'}" (click)="deleteSingleItem(searchHistoryQuery)">
+            <fa-icon class="faTrash" [icon]="faTrash"></fa-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+      </table>
+
+    </ng-template>
+
+</div>

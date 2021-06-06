@@ -1,0 +1,43 @@
+
+<div class="lead container-sm">
+
+    <h1 class="cover-heading">Search</h1>
+
+    <p class="lead">
+        Search the <a href="https://hn.algolia.com/">Hacker News Algolia API</a>.
+    </p>
+
+    <form class="example-form" [formGroup]="searchForm">
+        
+        <mat-form-field class="example-full-width">
+
+            <mat-label>Search for Hacker News...</mat-label>
+
+            <input matInput placeholder="Type to Search" (keyup)="searchApi()" formControlName="searchQuery" >
+
+        </mat-form-field>
+
+    </form>
+    
+    <button type="button" class="btn btn-lg btn-secondary" (click)="searchApi()">
+        <fa-icon [icon]="faSearch"></fa-icon>
+        Search
+    </button>
+
+    <div class='container-m mt-5'>
+
+        <p class='mb-5' *ngIf="searchHits > 0">Found {{ getFormattedHits(searchHits, 'en-US') }} results for "{{ searchQuery?.value }}".</p>
+
+        <!-- We will separate the search hits to a different component to produce modular, re-usable, and maintainable code.  -->
+        <!-- We will pass a search hit for every search hit from the searchResultList to this component as an input.          -->
+        <app-search-hit *ngFor="let searchHit of searchHitList" [searchHit]="searchHit"></app-search-hit>
+
+        <button *ngIf="searchHits > 0 && currentPage < totalPages" type="button" class="btn btn-lg btn-secondary" (click)="loadMore()">
+            Load More
+        </button>
+
+    </div>
+
+<div>
+
+<app-loading *ngIf="loading"></app-loading>

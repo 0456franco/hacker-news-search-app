@@ -1,0 +1,31 @@
+<div class="row gx-5 mb-2 text-start">
+
+    <a class="search-hit-link" href="{{ searchHit.url }}" target="_blank">
+    <mat-card>
+
+        <h2>{{ searchHit.title }}</h2>
+
+        <p>
+            {{ searchHit.story_text }}
+        </p>
+
+        <span type="button" class="btn" title="Author">            
+            <fa-icon class="faUser" [icon]="faUser"></fa-icon> {{ searchHit.author }}
+        </span>
+
+        <span type="button" class="btn" title="Created At">            
+            <fa-icon class="faClock" [icon]="faClock"></fa-icon> {{ searchHit.user_friendly_created_at }}
+        </span>
+
+        <span type="button" class="btn" title="Comments">            
+            <fa-icon class="faComment" [icon]="faComment"></fa-icon> {{ searchHit.num_comments }}
+        </span>
+
+        <span type="button" class="btn" title="Points">            
+            <fa-icon class="faStar" [icon]="faStar"></fa-icon> {{ searchHit.points }}
+        </span>
+
+    </mat-card>
+    </a>
+
+</div>
