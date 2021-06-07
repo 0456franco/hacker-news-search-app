@@ -11,6 +11,9 @@ import { HackerNewsSearchHistoryService } from '../services/hacker-news/search-h
 import { formatNumber } from '@angular/common'
 import * as dateFormat from 'dateformat'
 import { ActivatedRoute } from '@angular/router'
+import { logErrorMessage } from '../utility/operators/retry-operator'
+import { MatDialog } from '@angular/material/dialog'
+import { SearchApiError } from './errors/search.errors'
 
 const SEARCH_QUERY_DATE_FORMAT = "dddd, mmmm dS, yyyy, h:MM:ss TT"
 
@@ -37,6 +40,7 @@ export class SearchComponent implements OnInit {
   public searchForm: FormGroup = new FormGroup({})
 
   constructor(private formBuilder: FormBuilder,
+              private matDialog: MatDialog,
               private activatedRoute: ActivatedRoute,
               private hackerNewsSearchService: HackerNewsSearchService,
               private hackerNewsSearchHistoryService: HackerNewsSearchHistoryService) { }
@@ -69,6 +73,23 @@ export class SearchComponent implements OnInit {
         //Display the Search Results
         this.populateSearchHits(resp)
 
+      },
+      err => {
+
+        //Log the error into Sentry.
+
+        let sentryContext: any = {
+          errorName: 'Search API Error',
+          requestRetries: 3,
+          errorMessage: "There's been an error while searching the API. Please try again."
+        }
+  
+        sentryContext.error = new SearchApiError(sentryContext.errorName)
+        
+        logErrorMessage(3, err, sentryContext, this.matDialog)
+  
+        this.loading = false
+
       }
       
     )
@@ -81,28 +102,20 @@ export class SearchComponent implements OnInit {
   */
    populateSearchHits(resp: HackerNewsSearchResponse): void{
 
-    if(resp){
+    this.searchHits = resp.nbHits
+    this.totalPages = resp.nbPages
 
-      this.searchHits = resp.nbHits
-      this.totalPages = resp.nbPages
+    let hackerNewsSearchQueryExtended = new HackerNewsSearchQueryExtended()
+    Object.assign(hackerNewsSearchQueryExtended, this.hackerNewsSearchQuery)
 
-      let hackerNewsSearchQueryExtended = new HackerNewsSearchQueryExtended()
-      Object.assign(hackerNewsSearchQueryExtended, this.hackerNewsSearchQuery)
+    hackerNewsSearchQueryExtended.hits = this.searchHits
+    hackerNewsSearchQueryExtended.page = this.currentPage
+    hackerNewsSearchQueryExtended.timeOfSearchFriendly = dateFormat(hackerNewsSearchQueryExtended.timeOfSearch, SEARCH_QUERY_DATE_FORMAT)
 
-      hackerNewsSearchQueryExtended.hits = this.searchHits
-      hackerNewsSearchQueryExtended.page = this.currentPage
-      hackerNewsSearchQueryExtended.timeOfSearchFriendly = dateFormat(hackerNewsSearchQueryExtended.timeOfSearch, SEARCH_QUERY_DATE_FORMAT)
+    //Input the Search Query into the Search Results History
+    this.hackerNewsSearchHistoryService.addHistoryItem(hackerNewsSearchQueryExtended)
 
-      //Input the Search Query into the Search Results History
-      this.hackerNewsSearchHistoryService.addHistoryItem(hackerNewsSearchQueryExtended)
-
-      Array.prototype.push.apply(this.searchHitList, resp.hits)
-
-    } else {
-
-      //Log error into Sentry
-
-    }
+    Array.prototype.push.apply(this.searchHitList, resp.hits)
 
     this.loading = false
 

@@ -21,8 +21,6 @@ export function logErrorMessage(maxRetry: number, serverResponse: any, context: 
 	let sentryException = context.error
 
 	delete context.error
-
-
 	
 	Sentry.withScope((scope) => {
 
