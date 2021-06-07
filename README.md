@@ -10,16 +10,22 @@ You can find the live demo deployed using netlify here: https://eloquent-shaw-2e
 
 ## Notes
 
-There were various things to consider at the time of making this app. I will go through the list and explain the thought process behind each decision.
+There were a couple of things to consider at the time of making this app. I will go through the list and explain the thought process behind each decision.
 
 1. Not using the Algolia Instant Search package.
 
-The reason why I chose not to use this package was because it meant that I would have to downgrade my version of Angular because of compability issues as seen below:
+- The reason why I chose not to use this package was because it meant that I would have to downgrade my version of Angular because of compability issues as seen below:
+![alt text](https://github.com/0456franco/hacker-news-search-app/blob/main/readme-assets/algolia_version.png?raw=true)
+
 
 2. Not limitting what input users can input into the search bar.
 
-The reason I did not set any validators on the search input is because the best search engines like Google do not set validation on their search box. In this case
+- The reason I did not set any validators on the search input is because the best search engines like Google do not set validation on their search box. In this case
 it will be best left off to the back-end to handle dangerous requests.
+
+## Unit Testing
+
+- I wrote a couple of unit tests using Jasmine and Karma.
 
 ## Bootstrap 5 Docs.
 
