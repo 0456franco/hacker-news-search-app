@@ -10,15 +10,15 @@ You can find the live demo deployed using netlify here: https://eloquent-shaw-2e
 
 ## Bootstrap 5 Docs.
 
-You can find Bootstrap 5 docs. here:
+You can find Bootstrap 5 docs. here: https://github.com/0456franco/hacker-news-search-app
 
-## Angular Mat Docs.
+## Angular Mat Guides
 
-You can find Angular Material docs. here:
+You can find Angular Material Guides here: https://material.angular.io/guides
 
 ## Sentry Angular SDK
 
-You can find Sentry Angular SDK docs. here:
+You can find Sentry Angular SDK docs. here: https://docs.sentry.io/platforms/javascript/guides/angular/
 
 ## Sentry Error Caputring
 
