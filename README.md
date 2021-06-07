@@ -15,8 +15,11 @@ There were a couple of things to consider at the time of making this app. I will
 1. Not using the Algolia Instant Search package.
 
 - The reason why I chose not to use this package was because it meant that I would have to downgrade my version of Angular because of compability issues as seen below:
-![alt text](https://github.com/0456franco/hacker-news-search-app/blob/main/readme-assets/algolia_version.png?raw=true)
+https://www.algolia.com/doc/guides/building-search-ui/installation/angular/
 
+![alt text](https://github.com/0456franco/hacker-news-search-app/blob/main/readme-assets/out-dated-instant-search.png?raw=true)
+
+![alt text](https://github.com/0456franco/hacker-news-search-app/blob/main/readme-assets/algolia_version.png?raw=true)
 
 2. Not limitting what input users can input into the search bar.
 

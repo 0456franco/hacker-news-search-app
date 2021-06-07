@@ -4,7 +4,6 @@ import { HackerNewsSearchQuery } from 'src/app/shared/models/hacker-news-search-
 import { HackerNewsSearchResponse } from 'src/app/shared/models/hacker-news-search-response.model';
 import { HackerNewsSearchService } from './hacker-news-search.service';
 
-
 describe('HackerNewsSearchService', () => {
 
   let service: HackerNewsSearchService;
@@ -17,6 +16,7 @@ describe('HackerNewsSearchService', () => {
   } 
 
   beforeEach(() => {
+
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule
@@ -32,16 +32,14 @@ describe('HackerNewsSearchService', () => {
   });
   
   //Let's test if we can query the API and get the right response.
-  it('should get a response', (done: DoneFn) => {
+  it('should get a response', (done) => {
 
     service.startSearch(searchQuery).subscribe(
       resp => {
-        expect(resp).toContain(HackerNewsSearchResponse)
-        done()
-      },
-      done.fail
+        expect(resp).toBeInstanceOf(HackerNewsSearchResponse)
+      }
     )
-    
+    done()
   })
 
 });
