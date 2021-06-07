@@ -89,6 +89,15 @@ export class HistoryComponent implements OnInit {
 
   }
 
+  /**
+   * Will perform the search query.
+   */
+  goToItem(hackerNewsSearchQuery: HackerNewsSearchQueryExtended){
+
+    window.open(`/search/${encodeURIComponent(hackerNewsSearchQuery.query)}`, '_blank')
+
+  }
+
   ngOnInit(): void {
 
     this.getSearchHistory()

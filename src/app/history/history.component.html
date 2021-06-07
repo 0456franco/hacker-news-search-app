@@ -51,16 +51,26 @@
         <!-- Link Out Column -->
         <ng-container matColumnDef="clickable">
           <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let searchHistoryQuery" class="text-center" [ngStyle]="{'cursor':'pointer'}">
-            <fa-icon class="faSearch" [icon]="faExternalLink"></fa-icon>
+          <td mat-cell *matCellDef="let searchHistoryQuery" class="text-center">
+
+            <fa-icon class="faSearch" 
+                      [icon]="faExternalLink" 
+                      [ngStyle]="{'cursor':'pointer'}" 
+                      (click)="goToItem(searchHistoryQuery)"></fa-icon>
+          
           </td>
         </ng-container>
 
         <!-- Delete Record Column -->
         <ng-container matColumnDef="trash">
           <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let searchHistoryQuery" class="text-center" [ngStyle]="{'cursor':'pointer'}" (click)="deleteSingleItem(searchHistoryQuery)">
-            <fa-icon class="faTrash" [icon]="faTrash"></fa-icon>
+          <td mat-cell *matCellDef="let searchHistoryQuery" class="text-center">
+
+            <fa-icon class="faTrash" 
+                      [icon]="faTrash" 
+                      [ngStyle]="{'cursor':'pointer'}" 
+                      (click)="deleteSingleItem(searchHistoryQuery)"></fa-icon>
+                      
           </td>
         </ng-container>
 

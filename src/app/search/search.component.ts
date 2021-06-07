@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit {
   //FontAwesome Imports
   faSearch = faSearch
 
-  loading: boolean = false
+  loading: boolean = true
   
   searchHits: number = 0
   totalPages: number = 0
@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit {
   /**
    * Will start a search by querying the Hacker News Algolia API.
   */
-   @debounce(1000) //Debounce this function so that it only fires one second after the user's last key up.
+   @debounce(750) //Debounce this function so that it only fires 750ms after it's last called (the user's last key up).
   searchApi(): void{
 
     if(this.searchQuery?.value == null || this.searchQuery?.value == ''){ 
@@ -143,11 +143,17 @@ export class SearchComponent implements OnInit {
     let searchQueryParam = this.activatedRoute.snapshot.paramMap.get('query')
 
     if(searchQueryParam !== null){
-      //A query paramter exists, we must execute the query into our search form
-      console.log("Search Query", searchQueryParam)
-    }
 
-    this.loading = false
+      //A query paramter exists, we must execute the query into our search form.
+
+      this.searchQuery?.setValue( decodeURIComponent(searchQueryParam) )
+      this.searchApi()
+
+    } else {
+
+      this.loading = false
+
+    }
 
   }
 
@@ -167,10 +173,8 @@ export class SearchComponent implements OnInit {
     this.hackerNewsSearchService.startSearch(this.hackerNewsSearchQuery).subscribe(
 
       resp => {
-
         //Display the Search Results
         this.populateSearchHits(resp)
-
       }
       
     )
@@ -182,9 +186,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.initSearchForm()
-
   }
 
 }

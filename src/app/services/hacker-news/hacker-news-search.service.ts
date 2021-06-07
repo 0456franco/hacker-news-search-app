@@ -4,11 +4,11 @@
  * 
  */
 
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { HackerNewsSearchQuery } from '../../shared/models/hacker-news-search-query.model'
-import * as queryString from  'query-string'
+import * as queryString from  'qs'
 
 const API_ENDPOINT = 'https://hn.algolia.com/api'
 

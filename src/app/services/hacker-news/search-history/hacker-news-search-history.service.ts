@@ -27,7 +27,7 @@ export class HackerNewsSearchHistoryService {
 
       searchHistory = JSON.parse(searchHistoryString!)
 
-    searchHistory.history.push(query)
+    searchHistory.history.unshift(query)
 
     let newSearchHistory = JSON.stringify(searchHistory)
 
