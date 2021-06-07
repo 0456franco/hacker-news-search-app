@@ -129,14 +129,10 @@ export class SearchComponent implements OnInit {
   */
   initSearchForm(): void{
 
-    const searchValidators = [Validators.required]
+    const searchValidators = [Validators.required, ValidateSearchQuery( this.searchQuery ) ]
 
     this.searchForm = this.formBuilder.group({
       searchQuery: ['', searchValidators]
-    }, {
-      validators : () => {
-        ValidateSearchQuery( this.searchQuery )        
-      }
     })
 
     //Let's check if there is an exiting query parameter in our URL.

@@ -8,9 +8,22 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 You can find the live demo deployed using netlify here: https://eloquent-shaw-2e45c7.netlify.app/ 
 
+## Notes
+
+There were various things to consider at the time of making this app. I will go through the list and explain the thought process behind each decision.
+
+1. Not using the Algolia Instant Search package.
+
+The reason why I chose not to use this package was because it meant that I would have to downgrade my version of Angular because of compability issues as seen below:
+
+2. Not limitting what input users can input into the search bar.
+
+The reason I did not set any validators on the search input is because the best search engines like Google do not set validation on their search box. In this case
+it will be best left off to the back-end to handle dangerous requests.
+
 ## Bootstrap 5 Docs.
 
-You can find Bootstrap 5 docs. here: https://github.com/0456franco/hacker-news-search-app
+You can find Bootstrap 5 docs. here: https://getbootstrap.com/docs/5.0/getting-started/introduction/
 
 ## Angular Mat Guides
 
@@ -20,7 +33,7 @@ You can find Angular Material Guides here: https://material.angular.io/guides
 
 You can find Sentry Angular SDK docs. here: https://docs.sentry.io/platforms/javascript/guides/angular/
 
-## Sentry Error Caputring
+## Sentry Error Capturing
 
 This project uses Sentry to caputre errors.
 
