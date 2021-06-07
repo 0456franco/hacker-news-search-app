@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { HackerNewsSearchQueryExtended } from '../services/hacker-news/models/hacker-news-search-query.model';
+import { HackerNewsSearchQueryExtended } from '../shared/models/hacker-news-search-query.model';
 import { HackerNewsSearchHistoryService } from '../services/hacker-news/search-history/hacker-news-search-history.service';
 import * as dateFormat from 'dateformat'
 import { faClock, faExternalLinkAlt, faTrash } from '@fortawesome/free-solid-svg-icons'

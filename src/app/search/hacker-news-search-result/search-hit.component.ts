@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faClock, faComment, faStar, faUser } from '@fortawesome/free-solid-svg-icons';
-import { HackerNewsSearchHit } from '../../services/hacker-news/models/hacker-news-search-hit.model';
+import { HackerNewsSearchHit } from '../../shared/models/hacker-news-search-hit.model';
 import * as dateFormat from 'dateformat'
 
 @Component({

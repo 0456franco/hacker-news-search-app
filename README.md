@@ -6,7 +6,29 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Live Demo
 
-You can find the live demo deployed using netlify here: 
+You can find the live demo deployed using netlify here: https://eloquent-shaw-2e45c7.netlify.app/ 
+
+## Bootstrap 5 Docs.
+
+You can find Bootstrap 5 docs. here:
+
+## Angular Mat Docs.
+
+You can find Angular Material docs. here:
+
+## Sentry Angular SDK
+
+You can find Sentry Angular SDK docs. here:
+
+## Sentry Error Caputring
+
+This project uses Sentry to caputre errors.
+
+Front End Error Display
+![alt text](https://github.com/0456franco/hacker-news-search-app/blob/main/readme-assets/error_dialog.png?raw=true)
+
+Sentry Error Capture
+![alt text](https://github.com/0456franco/hacker-news-search-app/blob/main/readme-assets/error_sentry.png?raw=true)
 
 ## Development server
 
