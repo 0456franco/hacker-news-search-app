@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HackerNewsSearchHistory } from '../../../shared/models/hacker-news-search-history.model';
-import { HackerNewsSearchQueryExtended } from '../../../shared/models/hacker-news-search-query.model';
+import { HackerNewsSearchHistory } from 'src/app/shared/models/hacker-news-search-history.model';
+import { HackerNewsSearchQueryExtended } from 'src/app/shared/models/hacker-news-search-query.model';
 
 @Injectable({
   providedIn: 'root'

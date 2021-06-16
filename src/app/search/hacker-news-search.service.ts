@@ -7,8 +7,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { HackerNewsSearchQuery } from '../../shared/models/hacker-news-search-query.model'
 import * as queryString from  'qs'
+import { HackerNewsSearchQuery } from '../shared/models/hacker-news-search-query.model'
 
 const API_ENDPOINT = 'https://hn.algolia.com/api'
 

@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 
-import { HistoryComponent } from './history/history.component'
-import { HomeComponent } from './home/home.component'
-import { SearchComponent } from './search/search.component'
 
 const routes: Routes = [
 
-  { path: 'home', component: HomeComponent },
-  { path: 'search/:query',  component: SearchComponent  },
-  { path: 'search',  component: SearchComponent  },
-  { path: 'history', component: HistoryComponent },
+  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  { path: 'search',  loadChildren: () => import('./search/search.module').then(m => m.SearchModule)  },
+  { path: 'history', loadChildren: () => import('./history/history.module').then(m => m.HistoryModule) },
 
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 

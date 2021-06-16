@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { HackerNewsSearchQueryExtended } from '../shared/models/hacker-news-search-query.model';
-import { HackerNewsSearchHistoryService } from '../services/hacker-news/search-history/hacker-news-search-history.service';
 import * as dateFormat from 'dateformat'
 import { faClock, faExternalLinkAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { formatNumber } from '@angular/common';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { HackerNewsSearchHistoryService } from './hacker-news-search-history.service';
 
 const SEARCH_QUERY_DATE_FORMAT = "dddd, mmmm dS, yyyy, h:MM:ss TT"
 
